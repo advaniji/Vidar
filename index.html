@@ -36,7 +36,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">Vidar Downloader</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" 
+              aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -48,7 +49,7 @@
             <a class="nav-link" href="#instructions">Instructions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#about">About & Credits</a>
           </li>
         </ul>
       </div>
@@ -74,7 +75,7 @@
             <div class="card-body text-center">
               <h5 class="card-title">vidar.py</h5>
               <p class="card-text">The main Python script for Vidar Downloader.</p>
-              <a href="vidar.py" download class="btn btn-primary">Download</a>
+              <a href="https://github.com/advaniji/vidar/blob/main/vidar.py" class="btn btn-primary" target="_blank">Download</a>
             </div>
           </div>
         </div>
@@ -84,17 +85,21 @@
             <div class="card-body text-center">
               <h5 class="card-title">yt-dlp.exe</h5>
               <p class="card-text">Required for video downloading functionality.</p>
-              <a href="yt-dlp.exe" download class="btn btn-primary">Download</a>
+              <a href="https://github.com/yt-dlp/yt-dlp/releases/download/2025.02.19/yt-dlp.exe" 
+                 class="btn btn-primary" target="_blank">Download</a>
             </div>
           </div>
         </div>
-        <!-- aria2c.exe card -->
+        <!-- aria2c card -->
         <div class="col-md-4 mb-4">
           <div class="card card-download">
             <div class="card-body text-center">
-              <h5 class="card-title">aria2c.exe</h5>
-              <p class="card-text">Optional tool for accelerated downloads.</p>
-              <a href="aria2c.exe" download class="btn btn-primary">Download</a>
+              <h5 class="card-title">aria2c</h5>
+              <p class="card-text">
+                Optional: Download the zip file, extract <strong>aria2c.exe</strong>, and place it in the same folder.
+              </p>
+              <a href="https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0-win-64bit-build1.zip" 
+                 class="btn btn-primary" target="_blank">Download Zip</a>
             </div>
           </div>
         </div>
@@ -110,25 +115,42 @@
         To get started with Vidar Downloader, please follow these steps:
       </p>
       <ol>
-        <li>Download the <strong>vidar.py</strong> file along with the dependencies (<strong>yt-dlp.exe</strong> and <strong>aria2c.exe</strong>).</li>
-        <li>Place all files in the same directory to ensure proper functionality.</li>
-        <li>Install the required Python dependency:
+        <li>
+          Download the <strong>vidar.py</strong> file along with the dependencies: <strong>yt-dlp.exe</strong> 
+          and the <strong>aria2c</strong> zip file.
+        </li>
+        <li>
+          Extract the <strong>aria2c.exe</strong> from the downloaded zip file and place it in the same directory 
+          as <strong>vidar.py</strong> and <strong>yt-dlp.exe</strong>.
+        </li>
+        <li>
+          Ensure all files are in the same folder for proper functionality.
+        </li>
+        <li>
+          Install the required Python dependency:
           <pre>pip install customtkinter</pre>
         </li>
-        <li>Run <code>vidar.py</code> using Python 3.</li>
+        <li>
+          Run <code>vidar.py</code> using Python 3.
+        </li>
       </ol>
       <p>
-        Ensure you have Python 3 installed on your system. If you encounter any issues, please refer to the repository documentation.
+        Make sure you have Python 3 installed on your system. If you encounter any issues, please refer to the repository documentation.
       </p>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- About & Credits Section -->
   <section class="py-5" id="about">
     <div class="container">
-      <h2 class="mb-4 text-center">About Vidar Downloader</h2>
+      <h2 class="mb-4 text-center">About & Credits</h2>
       <p>
         Vidar Downloader is a minimal yet powerful video downloader built with Python. It leverages yt-dlp for efficient video downloads and uses a modern, intuitive GUI built with CustomTkinter. The optional integration with aria2c further accelerates downloads.
+      </p>
+      <p>
+        <strong>Credits:</strong> This project uses 
+        <a href="https://github.com/yt-dlp/yt-dlp" target="_blank">yt-dlp</a> and 
+        <a href="https://github.com/aria2/aria2" target="_blank">aria2</a>. Many thanks to their developers and contributors.
       </p>
       <p>
         This project is open-source and hosted on GitHub. Contributions and suggestions are always welcome.
