@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vidar Downloader - Official Download</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      padding-top: 56px;
+    }
+    .hero {
+      background-color: #343a40;
+      color: #fff;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+    .card-download {
+      transition: transform 0.2s ease-in-out;
+    }
+    .card-download:hover {
+      transform: translateY(-5px);
+    }
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Vidar Downloader</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#download">Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#instructions">Instructions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <h1 class="display-4">Vidar Downloader</h1>
+      <p class="lead">Minimal GUI video downloader built with yt-dlp, CustomTkinter, and aria2c</p>
+    </div>
+  </header>
+
+  <!-- Download Section -->
+  <section class="py-5" id="download">
+    <div class="container">
+      <h2 class="mb-4 text-center">Download Files</h2>
+      <div class="row">
+        <!-- vidar.py card -->
+        <div class="col-md-4 mb-4">
+          <div class="card card-download">
+            <div class="card-body text-center">
+              <h5 class="card-title">vidar.py</h5>
+              <p class="card-text">The main Python script for Vidar Downloader.</p>
+              <a href="vidar.py" download class="btn btn-primary">Download</a>
+            </div>
+          </div>
+        </div>
+        <!-- yt-dlp.exe card -->
+        <div class="col-md-4 mb-4">
+          <div class="card card-download">
+            <div class="card-body text-center">
+              <h5 class="card-title">yt-dlp.exe</h5>
+              <p class="card-text">Required for video downloading functionality.</p>
+              <a href="yt-dlp.exe" download class="btn btn-primary">Download</a>
+            </div>
+          </div>
+        </div>
+        <!-- aria2c.exe card -->
+        <div class="col-md-4 mb-4">
+          <div class="card card-download">
+            <div class="card-body text-center">
+              <h5 class="card-title">aria2c.exe</h5>
+              <p class="card-text">Optional tool for accelerated downloads.</p>
+              <a href="aria2c.exe" download class="btn btn-primary">Download</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instructions Section -->
+  <section class="py-5 bg-light" id="instructions">
+    <div class="container">
+      <h2 class="mb-4 text-center">Installation & Setup</h2>
+      <p>
+        To get started with Vidar Downloader, please follow these steps:
+      </p>
+      <ol>
+        <li>Download the <strong>vidar.py</strong> file along with the dependencies (<strong>yt-dlp.exe</strong> and <strong>aria2c.exe</strong>).</li>
+        <li>Place all files in the same directory to ensure proper functionality.</li>
+        <li>Install the required Python dependency:
+          <pre>pip install customtkinter</pre>
+        </li>
+        <li>Run <code>vidar.py</code> using Python 3.</li>
+      </ol>
+      <p>
+        Ensure you have Python 3 installed on your system. If you encounter any issues, please refer to the repository documentation.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-5" id="about">
+    <div class="container">
+      <h2 class="mb-4 text-center">About Vidar Downloader</h2>
+      <p>
+        Vidar Downloader is a minimal yet powerful video downloader built with Python. It leverages yt-dlp for efficient video downloads and uses a modern, intuitive GUI built with CustomTkinter. The optional integration with aria2c further accelerates downloads.
+      </p>
+      <p>
+        This project is open-source and hosted on GitHub. Contributions and suggestions are always welcome.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-0">© 2025 Vidar Downloader. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
