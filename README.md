@@ -75,22 +75,22 @@
     Cookies Support:
     Load a cookies file from the settings to bypass any stubborn restrictions.
 
-## Credits
+# Credits
 
     yt-dlp: The backbone of our video downloading power.
     aria2: The download accelerator that puts the "fast" in your downloads.
     CustomTkinter: For making the GUI look so sleek.
     Special thanks to all contributors – you rock!
 
-## Contributing
+# Contributing
 
     Contributions are always welcome. Feel free to submit issues, feature requests, or pull requests. Remember, great ideas and witty comments alike help keep the project fun and useful.
 
-## License
+# License
 
     This project is licensed under the Apache License 2.0. See the LICENSE file for details. Yes, we went with Apache 2.0—because even our licenses are cool.
 
-## Contact
+# Contact
 
     For questions, suggestions, or just to say hi, please open an issue on GitHub or contact the maintainer.
 
