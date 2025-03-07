@@ -24,10 +24,10 @@ class VidarDownloader(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Vidar Downloader")
-        self.geometry("650x600")
-        ctk.set_appearance_mode("dark")  
-        ctk.set_default_color_theme("blue")  
-
+        self.geometry("650x650")
+        ctk.set_appearance_mode("dark")
+        ctk.set_default_color_theme("blue")
+        
         # Queues for thread-safe UI updates
         self.download_queue = queue.Queue()
         self.log_queue = queue.Queue()
@@ -60,6 +60,9 @@ class VidarDownloader(ctk.CTk):
         # yt-dlp path and delayed initialization
         self.yt_dlp_path = None
 
+        # Turbo mode flag: adds extra arguments for faster downloads
+        self.turbo_mode = False
+
         self.create_widgets()
         threading.Thread(target=self.initialize_yt_dlp, daemon=True).start()
         self.start_queue_thread()
@@ -73,7 +76,7 @@ class VidarDownloader(ctk.CTk):
             return
         try:
             result = subprocess.run([self.yt_dlp_path, "--version"],
-                                    capture_output=True, text=True, check=True)
+                                      capture_output=True, text=True, check=True)
             self.append_log(f"Using yt-dlp version: {result.stdout.strip()}\n")
         except subprocess.CalledProcessError as e:
             self.show_error(f"Error getting yt-dlp version: {e.stderr}")
@@ -84,25 +87,21 @@ class VidarDownloader(ctk.CTk):
         self.main_frame.pack(padx=10, pady=10, fill="both", expand=True)
 
         # Two-tab layout: Download and Settings
-        self.tabview = ctk.CTkTabview(self.main_frame, width=600, height=450)
+        self.tabview = ctk.CTkTabview(self.main_frame, width=600, height=500)
         self.tabview.pack(pady=5)
         self.tabview.add("Download")
         self.tabview.add("Settings")
 
         # ---- Download Tab ----
         download_tab = self.tabview.tab("Download")
-        # URL input for single download
         ctk.CTkLabel(download_tab, text="Video URL:").pack(pady=(10, 0), padx=10, anchor="w")
         self.url_entry = ctk.CTkEntry(download_tab, placeholder_text="Enter video URL", width=580)
         self.url_entry.pack(pady=(0, 10), padx=10)
-        # Password entry for manual input
         ctk.CTkLabel(download_tab, text="Video Password (if required):").pack(pady=(5, 0), padx=10, anchor="w")
         self.password_entry = ctk.CTkEntry(download_tab, placeholder_text="Enter password", width=580, show="*")
         self.password_entry.pack(pady=(0, 10), padx=10)
-        # Button to load URLs from a text file
         self.load_file_btn = ctk.CTkButton(download_tab, text="Load URLs from File", command=self.load_urls_from_file)
         self.load_file_btn.pack(pady=5, padx=10)
-        # Label to display count of loaded URLs
         self.loaded_label = ctk.CTkLabel(download_tab, text="No URLs loaded from file.", fg_color="transparent")
         self.loaded_label.pack(pady=(5, 10), padx=10)
 
@@ -124,9 +123,11 @@ class VidarDownloader(ctk.CTk):
         self.download_btn = ctk.CTkButton(download_tab, text="Download", command=self.download_videos)
         self.download_btn.pack(pady=10, padx=10)
 
-        # Progress bar
+        # Progress bar and percentage label
         self.progress_bar = ctk.CTkProgressBar(download_tab, width=580)
         self.progress_bar.pack(pady=5, padx=10)
+        self.progress_label = ctk.CTkLabel(download_tab, text="Progress: 0%")
+        self.progress_label.pack(pady=(0, 10), padx=10)
 
         # Log textbox
         self.log_text = ctk.CTkTextbox(download_tab, state="disabled", width=580, height=120)
@@ -143,6 +144,11 @@ class VidarDownloader(ctk.CTk):
         self.ssl_check.pack(pady=5, padx=10, anchor="w")
         self.cookie_btn = ctk.CTkButton(settings_tab, text="Select Cookies File", command=self.select_cookie_file)
         self.cookie_btn.pack(pady=10, padx=10, anchor="w")
+        
+        # Turbo Mode checkbox
+        self.turbo_mode_check = ctk.CTkCheckBox(settings_tab, text="Enable Turbo Mode", command=self.toggle_turbo)
+        self.turbo_mode_check.pack(pady=5, padx=10, anchor="w")
+        
         out_dir_frame = ctk.CTkFrame(settings_tab, corner_radius=6)
         out_dir_frame.pack(pady=10, padx=10, fill="x")
         ctk.CTkLabel(out_dir_frame, text="Output Directory:").grid(row=0, column=0, padx=5, pady=5, sticky="w")
@@ -151,6 +157,11 @@ class VidarDownloader(ctk.CTk):
         self.output_dir_entry.grid(row=0, column=1, padx=5, pady=5)
         self.browse_btn = ctk.CTkButton(out_dir_frame, text="Browse", command=self.browse_output_directory, width=80)
         self.browse_btn.grid(row=0, column=2, padx=5, pady=5)
+
+    def toggle_turbo(self):
+        self.turbo_mode = not self.turbo_mode
+        mode = "enabled" if self.turbo_mode else "disabled"
+        self.append_log(f"Turbo Mode {mode}.\n")
 
     def select_cookie_file(self):
         file_path = filedialog.askopenfilename(title="Select Cookies File")
@@ -221,6 +232,7 @@ class VidarDownloader(ctk.CTk):
             while True:
                 prog = self.progress_queue.get_nowait()
                 self.progress_bar.set(prog)
+                self.progress_label.configure(text=f"Progress: {int(prog * 100)}%")
         except queue.Empty:
             pass
 
@@ -280,6 +292,10 @@ class VidarDownloader(ctk.CTk):
             self.aria2_args = self.aria2_args_entry.get().strip()
             if self.aria2_args:
                 command += self.aria2_args.split()
+
+        # Append Turbo Mode arguments if enabled
+        if self.turbo_mode:
+            command += ["--concurrent-fragments", "10", "--buffer-size", "16K"]
 
         command += [
             "-f", quality_format,
